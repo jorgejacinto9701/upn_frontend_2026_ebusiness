@@ -1,0 +1,111 @@
+<app-menu></app-menu>
+<div class="container">
+    <mat-toolbar color="primary">
+        <span>Registra Modalidad</span>
+    </mat-toolbar>
+
+    <form [formGroup] ="forms" style="margin-top: 20px;" (ngSubmit)="registrar()">
+         <div class="row">
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre"  placeholder="Ingresa tu nombre">
+                    <mat-error *ngIf="forms.get('nombre')?.hasError('required')">
+                        El nombre es obligatorio
+                    </mat-error>
+                     <mat-error *ngIf="forms.get('nombre')?.hasError('pattern')">
+                        El nombre debe estarer entre 3 y 20 caracteres
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Num Hombres</mat-label>
+                    <input matInput formControlName="numHombres" placeholder="Ingresa el número de hombres">
+                    <mat-error *ngIf="forms.get('numHombres')?.hasError('required')">
+                        El Num Hombres es obligatorio
+                    </mat-error>
+                     <mat-error *ngIf="forms.get('numHombres')?.hasError('pattern')">
+                        El nombre de Hombres es de 1 a 5
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Num Mujeres</mat-label>
+                    <input matInput formControlName="numMujeres" placeholder="Ingresa el número de mujeres">
+                    <mat-error *ngIf="forms.get('numMujeres')?.hasError('required')">
+                        El Num Mujeres es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="forms.get('numMujeres')?.hasError('pattern')">
+                        El nombre de Mujeres es de 1 a 5
+                    </mat-error>
+                </mat-form-field>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Edad Máxima</mat-label>
+                    <input matInput formControlName="edadMaxima" placeholder="Ingresa la edad máxima">
+                    <mat-error *ngIf="forms.get('edadMaxima')?.hasError('required')">
+                        La Edad Máxima es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="forms.get('edadMaxima')?.hasError('pattern')">
+                         La Edad Máxima es de 18 a 69 años
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Edad Mínima</mat-label>
+                    <input matInput formControlName="edadMinima" placeholder="Ingresa la edad mínima">
+                    <mat-error *ngIf="forms.get('edadMinima')?.hasError('required')">
+                        La Edad Mínima nombre es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="forms.get('edadMinima')?.hasError('pattern')">
+                         La Edad Mínima es de 18 a 69 años
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                 <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Sede</mat-label>
+                    <mat-select formControlName="sede">
+                        <mat-option value="">[Seleccione ]</mat-option>
+                        <mat-option value="Independencia">Independencia</mat-option>
+                        <mat-option value="Lima">Lima</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="forms.get('sede')?.hasError('required')">
+                        La Sede es obligatorio
+                    </mat-error>
+                </mat-form-field>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Deporte</mat-label>
+                    <mat-select formControlName="deporte">
+                        <mat-option value="">[Seleccione ]</mat-option>
+                        <mat-option *ngFor="let aux of listaDeporte" [value]="aux.idDeporte">
+                            {{ aux.nombre }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="forms.get('deporte')?.hasError('required')">
+                        El Deporte es obligatorio
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+         </div>
+        <div class="row">
+             <div class="col-md-12 d-flex justify-content-center">
+                <button mat-raised-button color="primary" type="submit"
+                     [disabled]="forms.invalid">Enviar</button>
+            </div>
+         </div>
+    </form>
+
+  
+</div>

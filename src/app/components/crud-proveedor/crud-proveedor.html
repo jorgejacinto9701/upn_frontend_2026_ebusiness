@@ -1,0 +1,118 @@
+<app-menu></app-menu>
+<div class="container">
+
+    <mat-toolbar color="primary">
+        <span>Consulta Proveedor</span>
+    </mat-toolbar>
+     <form [formGroup] ="forms" style="margin-top: 20px;">
+    <div class="row">
+          <div class="col-md-8">
+             <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre"  placeholder="Ingresa tu nombre">
+                </mat-form-field>
+          </div>
+          <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="dni"  placeholder="Ingresa tu DNI">
+                </mat-form-field>
+          </div>
+    </div>
+    <div class="row">
+           <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Tipo</mat-label>
+                    <mat-select formControlName="tipo">
+                        <mat-option value="-1">[Seleccione ]</mat-option>
+                        <mat-option *ngFor="let aux of listaTipo" [value]="aux.idTipo">
+                            {{ aux.descripcion }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+           </div>
+           <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>País</mat-label>
+                    <mat-select formControlName="pais">
+                        <mat-option value="-1">[Seleccione ]</mat-option>
+                        <mat-option *ngFor="let aux of listaPais" [value]="aux.idPais">
+                            {{ aux.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+           </div>
+           <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="estado">
+                        <mat-option value="-1">[Seleccione ]</mat-option>
+                        <mat-option value="1">Activo</mat-option>
+                        <mat-option value="0">Inactivo</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+           </div>
+     </div>
+     <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <button mat-raised-button color="primary" type="button" (click)="consultaProveedor()" style="width: 150px; margin-right: 20px;">Filtrar</button>
+                <button mat-raised-button color="primary" type="button" (click)="openDialogRegistrar()" style="width: 150px;">Registrar</button>
+            </div>
+      </div>
+
+    </form> 
+    
+      <div class="row" style="margin-top: 3%">
+        <mat-table #table class="mat-cell" [dataSource]="dataSource">
+            <ng-container matColumnDef="codigo">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Código</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.idProveedor }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.nombre}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dni">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>DNI</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.dni}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="pais">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>País</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.pais.nombre}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.tipo.descripcion}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="estado">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>estado</mat-header-cell>
+                <mat-cell *matCellDef="let aux">{{ aux.estado == 0 ? "Inactivo":"Activo"}}</mat-cell>
+            </ng-container>
+
+             <ng-container matColumnDef="acciones">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef>&nbsp;</mat-header-cell>
+                     <mat-cell *matCellDef="let aux; let i=index;">
+                       
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="idEstado_{{ aux.idProveedor}}" name="estado"
+                            [checked]="aux.estado==1?true:false"
+                             (change)="updateEstado(aux)"/>
+                        <label class="custom-control-label" for="idEstado_{{ aux.idProveedor}}"></label>
+                    </div>
+                     <button mat-icon-button color="accent"  (click)="openDialogActualizar(aux)"  >
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    
+                    <button mat-icon-button color="accent"  (click)="eliminaProvedor(aux)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                     </mat-cell>
+            </ng-container>
+         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let aux; columns: displayedColumns"></mat-row>
+       </mat-table>
+       <mat-paginator [pageSizeOptions]="[6,8,10]" showFirstLastButtons></mat-paginator>
+
+   </div>
+</div>

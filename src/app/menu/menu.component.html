@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="#">Cibertec</a>
+    <button class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item" >
+            <a class="nav-link"  routerLink="/catalogoProducto"><i class="fas fa-sign-in-alt"></i> Catálogo</a>
+        </li>
+        <li class="nav-item " *ngIf="!isLogged">
+            <a class="nav-link"  routerLink="/login"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogged" (click)="onLogOut()">
+            <a class="nav-link" style="cursor: pointer;"><i class="fas fa-door-open" ></i> Cerrar Sesión</a>
+        </li>
+      
+
+      <li class="nav-item dropdown" *ngIf="isLogged">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="dropdownRegistros"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Registros 
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownRegistros">
+             <a *ngFor="let item of opcRegistro"  [routerLink]="['/', item.ruta]" class="dropdown-item"  >
+                      {{ item.nombre }} 
+              </a>
+        </div>
+      </li>
+     
+            <li class="nav-item dropdown" *ngIf="isLogged">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="dropdownConsultas"
+          role="button"
+         data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Consultas
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownConsultas">
+             <a *ngFor="let item of opcConsulta"  [routerLink]="['/', item.ruta]" class="dropdown-item"  >
+                      {{ item.nombre }} 
+              </a>
+        </div>
+      </li>
+      
+            <li class="nav-item dropdown" *ngIf="isLogged">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="dropdownCrud"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          CRUD 
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownCrud">
+             <a *ngFor="let item of opcCRUD"  [routerLink]="['/', item.ruta]" class="dropdown-item"  >
+                      {{ item.nombre }} 
+              </a>
+        </div>
+      </li>
+
+            <li class="nav-item dropdown" *ngIf="isLogged">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="dropdownTransacciones"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Transacciones - Reportes
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownTransacciones">
+             <a *ngFor="let item of opcTransacciones"  [routerLink]="['/', item.ruta]" class="dropdown-item"  >
+                      {{ item.nombre }} 
+              </a>
+        </div>
+      </li>
+    </ul>
+
+
+    </div>
+  </nav>

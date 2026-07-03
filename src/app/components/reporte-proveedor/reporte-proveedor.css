@@ -1,0 +1,106 @@
+.container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+mat-toolbar {
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.chart-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s ease;
+}
+
+.chart-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+.chart-card mat-card-header {
+    padding: 20px 20px 0 20px;
+}
+
+.chart-card mat-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-icon {
+    font-size: 24px;
+}
+
+/* Contenedor para gráficos de barra y línea */
+.chart-container {
+    padding: 20px;
+    height: 400px;
+    position: relative;
+    width: 100%;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Contenedor especial para gráfico Pie (circular) */
+.chart-container-pie {
+    padding: 20px;
+    height: 400px;
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.chart-container-pie canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .chart-container {
+        height: 300px;
+        padding: 10px;
+    }
+    
+    .chart-container-pie {
+        height: 300px;
+        width: 300px;
+        padding: 10px;
+    }
+    
+    .chart-card mat-card-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-container {
+        height: 250px;
+        padding: 5px;
+    }
+    
+    .chart-container-pie {
+        height: 250px;
+        width: 250px;
+        padding: 5px;
+    }
+}

@@ -1,0 +1,73 @@
+<app-menu></app-menu>
+<div class="container">
+    <mat-toolbar color="primary">
+        <span>Registra Docente</span>
+    </mat-toolbar>
+
+   <form [formGroup] ="forms" style="margin-top: 20px;" (ngSubmit)="registrar()">
+         <div class="row">
+            <div class="col-md-12">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre"  placeholder="Ingresa tu nombre">
+                    <mat-error *ngIf="forms.get('nombre')?.hasError('required')">
+                        El nombre es obligatorio
+                    </mat-error>
+                     <mat-error *ngIf="forms.get('nombre')?.hasError('pattern')">
+                        El nombre debe estarer entre 3 y 20 caracteres
+                    </mat-error>
+                </mat-form-field>
+            </div>
+         </div>
+          <div class="row">
+             <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Departamento</mat-label>
+                            <mat-select formControlName="departamento" (selectionChange)="cargaProvincia()">
+                                <mat-option value="">[Seleccione ]</mat-option>
+                                <mat-option *ngFor="let aux of listaDepartamento" [value]="aux">
+                                    {{ aux }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="forms.get('departamento')?.hasError('required')">
+                                El Departamento es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Provincia</mat-label>
+                            <mat-select formControlName="provincia" (selectionChange)="cargaDistrito()">
+                                <mat-option value="">[Seleccione ]</mat-option>
+                                <mat-option *ngFor="let aux of listaProvincia" [value]="aux">
+                                    {{ aux }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="forms.get('provincia')?.hasError('required')">
+                                La Provincia es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Distrito</mat-label>
+                            <mat-select formControlName="distrito">
+                                <mat-option value="">[Seleccione ]</mat-option>
+                                <mat-option *ngFor="let aux of listaDistrito" [value]="aux.idUbigeo">
+                                    {{ aux.distrito }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="forms.get('distrito')?.hasError('required')">
+                                El Distrito es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+          </div> 
+            <div class="row">
+             <div class="col-md-12 d-flex justify-content-center">
+                <button mat-raised-button color="primary" type="submit"
+                     [disabled]="forms.invalid">Enviar</button>
+            </div>
+         </div>  
+   </form>     
+</div>

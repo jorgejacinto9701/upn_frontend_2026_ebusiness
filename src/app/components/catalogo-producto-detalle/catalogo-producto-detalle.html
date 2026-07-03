@@ -1,0 +1,51 @@
+<app-menu></app-menu>
+
+<div class="contenedor">
+  @if(productoAux | async; as producto){
+  <div class="detalle-card">
+    <div class="imagen-container">
+      <img [src]="producto.image" [alt]="producto.title">
+    </div>
+    <div class="info">
+      <h1>{{ producto.title }}</h1>
+      <div class="precio">
+        $ {{ producto.price }}
+      </div>
+      <div class="datos">
+        <div class="dato">
+          <span>Categoría</span>
+          <strong>{{ producto.category }}</strong>
+        </div>
+        <div class="dato">
+          <span>Rating</span>
+          <strong>
+            ⭐ {{ producto.rating?.rate }}
+          </strong>
+        </div>
+        <div class="dato">
+          <span>Reviews</span>
+          <strong>
+            {{ producto.rating?.count }}
+          </strong>
+        </div>
+      </div>
+      <div class="descripcion">
+        <h3>Descripción</h3>
+        <p>
+          {{ producto.description }}
+        </p>
+      </div>
+      <button class="btn-regresar" routerLink="/catalogoProducto">
+        ← Regresar
+      </button>
+    </div>
+ </div>
+  }
+  @else {
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Cargando producto...</p>
+  </div>
+  }
+
+</div>

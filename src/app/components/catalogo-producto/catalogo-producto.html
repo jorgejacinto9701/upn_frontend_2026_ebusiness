@@ -1,0 +1,37 @@
+<app-menu></app-menu>
+
+<section class="catalogo">
+  <div class="cabecera">
+    <h1>Catálogo de Productos</h1>
+
+    @if (productosAux | async; as productos) {
+      <span class="contador"> {{ productos.length }} productos disponibles </span>
+    }
+  </div>
+
+  @if (productosAux | async; as productos) {
+    <div class="contenedor">
+      @for (producto of productos; track producto.id) {
+        <article class="card">
+          <div class="imagen">
+            <img [src]="producto.image" [alt]="producto.title" />
+          </div>
+
+          <div class="contenido">
+            <h3>
+              {{ producto.title }}
+            </h3>
+
+            <p class="precio">$ {{ producto.price }}</p>
+
+            <a class="btn-detalle" [routerLink]="['/detalleProducto', producto.id]">
+              Ver detalle
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="loading">Cargando productos...</div>
+  }
+</section>

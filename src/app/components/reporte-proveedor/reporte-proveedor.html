@@ -1,0 +1,108 @@
+<app-menu></app-menu>
+<div class="container">
+
+    <mat-toolbar color="primary">
+        <span style="display: flex; align-items: center; gap: 10px;">
+            <span>📊</span>
+            Dashboard de Proveedores
+        </span>
+    </mat-toolbar>
+
+    <!-- GRÁFICO 1 -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <mat-card class="chart-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <span class="card-icon">🌍</span>
+                        Proveedores por País
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="chart-container">
+                        <canvas
+                            baseChart
+                            [data]="barPaisData"
+                            [options]="barOptions"
+                            [type]="'bar'">
+                        </canvas>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- GRÁFICO 2 -->
+
+    <div class="row mt-4">
+        <div class="col-12">
+        <mat-card class="chart-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <span class="card-icon">🔄</span>
+                    Distribución por Estado
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="chart-container-pie">
+                    <canvas
+                        baseChart
+                        [data]="pieEstadoData"
+                        [options]="pieOptions"
+                        [type]="'pie'">
+                    </canvas>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+    <!-- GRÁFICO 3 -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <mat-card class="chart-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <span class="card-icon">📈</span>
+                        Registros por Mes
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="chart-container">
+                        <canvas
+                            baseChart
+                            [data]="lineMesData"
+                            [options]="lineOptions"
+                            [type]="'line'">
+                        </canvas>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- GRÁFICO 4 -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <mat-card class="chart-card">
+                <mat-card-header>
+                    <mat-card-title>
+                        <span class="card-icon">📋</span>
+                        Cantidad por Tipo
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="chart-container">
+                        <canvas
+                            baseChart
+                            [data]="barTipoData"
+                            [options]="horizontalBarOptions"
+                            [type]="'bar'">
+                        </canvas>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+</div>
