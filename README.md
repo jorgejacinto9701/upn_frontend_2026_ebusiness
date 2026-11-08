@@ -1,59 +1,127 @@
-# AngularUpcFrontend2026
+# 🛒 UPN Frontend 2026 – E-Business
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+Aplicación web desarrollada con **Angular** para la plataforma de comercio electrónico del curso **E-Business (UPN 2026)**. Consume la API REST del backend (Spring Boot + JPA + MySQL).
 
-## Development server
+## 📌 Tecnologías
 
-To start a local development server, run:
+| Tecnología | Uso |
+|---|---|
+| Angular 21 (Angular CLI 21.2.6) | Framework principal |
+| TypeScript | Lenguaje |
+| Node.js + npm | Entorno y gestor de paquetes |
+| Vitest | Pruebas unitarias |
+| Prettier / EditorConfig | Formato y estilo de código |
+
+## 🔗 Repositorios
+
+- **Frontend:** https://github.com/jorgejacinto9701/upn_frontend_2026_ebusiness
+- **Backend:** https://github.com/jorgejacinto9701/upn_backend_2026_ebusiness
+
+## 👥 Integrantes y funcionalidades
+
+| # | Integrante | Funcionalidad asignada |
+|---|---|---|
+| 1 | Jimenes Inofuente Anhely Maxima | Comentarios por usuarios |
+| 2 | Schwarten Flores Hainz | Agregar descripción completa |
+| 3 | Rojas Espinoza Edwin | Agregar al carrito (solo agregar a una grilla) |
+| 4 | Valencia Diaz Gian Piero | Búsqueda por categoría |
+
+## ✨ Detalle de funcionalidades
+
+### 1. Comentarios por usuarios — *Jimenes Inofuente Anhely Maxima*
+- Formulario para que el usuario escriba un comentario sobre un producto.
+- Listado de los comentarios registrados de cada producto.
+
+### 2. Agregar descripción completa — *Schwarten Flores Hainz*
+- Formulario para registrar/actualizar la descripción completa de un producto.
+- Vista de detalle del producto mostrando su descripción completa.
+
+### 3. Agregar al carrito — *Rojas Espinoza Edwin*
+- Botón "Agregar al carrito" en los productos.
+- Los productos agregados se muestran en una **grilla** (tabla). El alcance se limita a agregar y listar.
+
+### 4. Búsqueda por categoría — *Valencia Diaz Gian Piero*
+- Selector/listado de categorías.
+- Grilla de productos filtrada según la categoría elegida.
+
+## 🗂️ Estructura del proyecto
+
+```
+├── public/                 # Recursos estáticos
+├── src/
+│   ├── app/                # Componentes, servicios y rutas
+│   ├── index.html
+│   └── styles.css
+├── angular.json            # Configuración de Angular CLI
+├── package.json            # Dependencias y scripts
+├── tsconfig*.json          # Configuración de TypeScript
+├── .prettierrc             # Reglas de Prettier
+└── .editorconfig
+```
+
+> Se recomienda organizar `src/app` por funcionalidad (por ejemplo `comentarios/`, `producto/`, `carrito/`, `categoria/`) más una carpeta `services/` para las llamadas HTTP al backend.
+
+## ⚙️ Instalación y ejecución
+
+### Requisitos previos
+- [Node.js](https://nodejs.org/) (versión LTS compatible con Angular 21)
+- npm
+- Angular CLI:
 
 ```bash
+npm install -g @angular/cli
+```
+
+- Backend en ejecución (por defecto `http://localhost:8090`; ajustar si usas otro puerto)
+
+### Pasos
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/jorgejacinto9701/upn_frontend_2026_ebusiness.git
+cd upn_frontend_2026_ebusiness
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Levantar el servidor de desarrollo
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Abre `http://localhost:4200/`. La aplicación se recarga automáticamente al modificar los archivos.
 
-## Code scaffolding
+## 🔌 Conexión con el backend
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Define la URL base de la API en un servicio o archivo de entorno, por ejemplo:
 
-```bash
-ng generate component component-name
+```ts
+export const API_URL = 'http://localhost:8090/api';
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Recuerda habilitar **CORS** en el backend para el origen `http://localhost:4200`.
 
-```bash
-ng generate --help
-```
+## 🧰 Comandos útiles
 
-## Building
+| Comando | Descripción |
+|---|---|
+| `ng serve` | Servidor de desarrollo en `http://localhost:4200/` |
+| `ng generate component nombre` | Genera un nuevo componente |
+| `ng generate service nombre` | Genera un nuevo servicio |
+| `ng build` | Compila el proyecto en la carpeta `dist/` |
+| `ng test` | Ejecuta las pruebas unitarias con Vitest |
+| `ng e2e` | Ejecuta pruebas end-to-end (requiere configurar un framework) |
 
-To build the project run:
+## 🌿 Flujo de trabajo con Git
 
-```bash
-ng build
-```
+1. Cada integrante trabaja en su propia rama: `feature/comentarios`, `feature/descripcion`, `feature/carrito`, `feature/busqueda-categoria`.
+2. Realizar *commits* con mensajes claros.
+3. Abrir un *Pull Request* hacia `master` para integrar los cambios.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📚 Recursos adicionales
 
-## Running unit tests
+- [Documentación de Angular](https://angular.dev)
+- [Angular CLI – Referencia de comandos](https://angular.dev/tools/cli)
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 📄 Licencia
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Proyecto académico – Universidad Privada del Norte (UPN) – 2026.
