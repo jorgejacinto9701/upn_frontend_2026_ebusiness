@@ -1,51 +1,183 @@
+
 <app-menu></app-menu>
 
 <div class="contenedor">
-  @if(productoAux | async; as producto){
-  <div class="detalle-card">
-    <div class="imagen-container">
-      <img [src]="producto.image" [alt]="producto.title">
+
+  @if (productoAux | async; as producto) {
+
+    <div class="detalle-card">
+
+      <div class="imagen-container">
+        <img [src]="producto.image" [alt]="producto.title">
+      </div>
+
+      <div class="info">
+
+        <h1>{{ producto.title }}</h1>
+
+        <div class="precio">
+          $ {{ producto.price }}
+        </div>
+
+        <div class="datos">
+
+          <div class="dato">
+            <span>Categoría</span>
+            <strong>{{ producto.category }}</strong>
+          </div>
+
+          <div class="dato">
+            <span>Rating</span>
+            <strong>
+              ⭐ {{ producto.rating?.rate }}
+            </strong>
+          </div>
+
+          <div class="dato">
+            <span>Reviews</span>
+            <strong>
+              {{ producto.rating?.count }}
+            </strong>
+          </div>
+
+        </div>
+
+        <!-- Descripción del producto -->
+        <div class="descripcion">
+          <h3>Descripción</h3>
+          <p>{{ producto.description }}</p>
+        </div>
+
+        <!-- Comentarios de usuarios -->
+        <div class="comentarios">
+
+          <h3>Comentarios de usuarios</h3>
+
+          @if (comentariosAux | async; as comentarios) {
+
+            @if (comentarios.length > 0) {
+
+              @for (comentario of comentarios; track comentario.idComentario) {
+
+                <div class="comentario-item">
+
+                  <small class="comentario-autor">
+                    👤 {{ comentario.nombreUsuario?.trim() || 'Usuario registrado' }}
+                  </small>
+
+                  <p class="comentario-texto">
+                    {{ comentario.descripcion }}
+                  </p>
+
+                </div>
+
+              }
+
+            } @else {
+
+              <p>Este producto todavía no tiene comentarios.</p>
+
+            }
+
+          } @else {
+
+            <p>Cargando comentarios...</p>
+
+          }
+
+          <!-- Formulario para usuarios autenticados -->
+          <div class="formulario-comentario">
+
+            <h3>Escribe tu comentario</h3>
+
+            @if (estaLogueado) {
+
+              <p>
+                Publicando como:
+                <strong>{{ nombreUsuario }}</strong>
+              </p>
+
+              <form
+                [formGroup]="formularioComentario"
+                (ngSubmit)="publicarComentario()">
+
+                <textarea
+                  formControlName="descripcion"
+                  rows="4"
+                  maxlength="1000"
+                  placeholder="Escribe aquí tu opinión sobre el producto...">
+                </textarea>
+
+                @if (
+                  formularioComentario.get('descripcion')?.invalid &&
+                  formularioComentario.get('descripcion')?.touched
+                ) {
+                  <p class="error-comentario">
+                    Escribe un comentario válido (máximo 1000 caracteres).
+                  </p>
+                }
+
+                <button
+                  type="submit"
+                  class="btn-publicar"
+                  [disabled]="formularioComentario.invalid || enviandoComentario">
+
+                  @if (enviandoComentario) {
+                    Publicando...
+                  } @else {
+                    Publicar comentario
+                  }
+
+                </button>
+
+              </form>
+
+            } @else {
+
+              <p>
+                Para escribir un comentario, primero debes iniciar sesión.
+              </p>
+
+              <a routerLink="/login" class="btn-iniciar-sesion">
+                Iniciar sesión
+              </a>
+
+            }
+
+            @if (mensajeComentario) {
+              <p class="mensaje-comentario">
+                {{ mensajeComentario }}
+              </p>
+            }
+
+            @if (errorComentario) {
+              <p class="error-comentario">
+                {{ errorComentario }}
+              </p>
+            }
+
+          </div>
+
+        </div>
+
+        <!-- Regresar al catálogo -->
+        <button
+          class="btn-regresar"
+          routerLink="/catalogoProducto">
+          ← Regresar
+        </button>
+
+      </div>
+
     </div>
-    <div class="info">
-      <h1>{{ producto.title }}</h1>
-      <div class="precio">
-        $ {{ producto.price }}
-      </div>
-      <div class="datos">
-        <div class="dato">
-          <span>Categoría</span>
-          <strong>{{ producto.category }}</strong>
-        </div>
-        <div class="dato">
-          <span>Rating</span>
-          <strong>
-            ⭐ {{ producto.rating?.rate }}
-          </strong>
-        </div>
-        <div class="dato">
-          <span>Reviews</span>
-          <strong>
-            {{ producto.rating?.count }}
-          </strong>
-        </div>
-      </div>
-      <div class="descripcion">
-        <h3>Descripción</h3>
-        <p>
-          {{ producto.description }}
-        </p>
-      </div>
-      <button class="btn-regresar" routerLink="/catalogoProducto">
-        ← Regresar
-      </button>
+
+  } @else {
+
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Cargando producto...</p>
     </div>
- </div>
-  }
-  @else {
-  <div class="loading">
-    <div class="spinner"></div>
-    <p>Cargando producto...</p>
-  </div>
+
   }
 
 </div>

@@ -1,6 +1,6 @@
 export class AppSettings {
 
-    public static API_ENDPOINT='https://backend-upc-arqui-deploy-2026.onrender.com/url';
+    public static API_ENDPOINT='http://localhost:8091/url';
 
     
 
